@@ -54,41 +54,42 @@ diamondK = pygame.image.load('resources/cards/kd.png')
 clubK = pygame.image.load('resources/cards/kc.png')
 heartK = pygame.image.load('resources/cards/kh.png')
 spadeK = pygame.image.load('resources/cards/ks.png')
-black = (0,0,0)
-white = (255,255,255)
-gray = (192,192,192)
-blue = (0,0,139)
-cards = [ diamondA, clubA, heartA, spadeA, \
-          diamond2, club2, heart2, spade2, \
-          diamond3, club3, heart3, spade3, \
-          diamond4, club4, heart4, spade4, \
-          diamond5, club5, heart5, spade5, \
-          diamond6, club6, heart6, spade6, \
-          diamond7, club7, heart7, spade7, \
-          diamond8, club8, heart8, spade8, \
-          diamond9, club9, heart9, spade9, \
-          diamond10, club10, heart10, spade10, \
+black = (0, 0, 0)
+white = (255, 255, 255)
+gray = (192, 192, 192)
+blue = (0, 0, 139)
+cards = [diamondA, clubA, heartA, spadeA, \
+         diamond2, club2, heart2, spade2, \
+         diamond3, club3, heart3, spade3, \
+         diamond4, club4, heart4, spade4, \
+         diamond5, club5, heart5, spade5, \
+         diamond6, club6, heart6, spade6, \
+         diamond7, club7, heart7, spade7, \
+         diamond8, club8, heart8, spade8, \
+         diamond9, club9, heart9, spade9, \
+         diamond10, club10, heart10, spade10, \
+         diamondJ, clubJ, heartJ, spadeJ, \
+         diamondQ, clubQ, heartQ, spadeQ, \
+         diamondK, clubK, heartK, spadeK]
+cardA = [diamondA, clubA, heartA, spadeA]
+card2 = [diamond2, club2, heart2, spade2]
+card3 = [diamond3, club3, heart3, spade3]
+card4 = [diamond4, club4, heart4, spade4]
+card5 = [diamond5, club5, heart5, spade5]
+card6 = [diamond6, club6, heart6, spade6]
+card7 = [diamond7, club7, heart7, spade7]
+card8 = [diamond8, club8, heart8, spade8]
+card9 = [diamond9, club9, heart9, spade9]
+card10 = [diamond10, club10, heart10, spade10, \
           diamondJ, clubJ, heartJ, spadeJ, \
           diamondQ, clubQ, heartQ, spadeQ, \
-          diamondK, clubK, heartK, spadeK ]
-cardA = [ diamondA, clubA, heartA, spadeA ]
-card2 = [ diamond2, club2, heart2, spade2 ]
-card3 = [ diamond3, club3, heart3, spade3 ]
-card4 = [ diamond4, club4, heart4, spade4 ]
-card5 = [ diamond5, club5, heart5, spade5 ]
-card6 = [ diamond6, club6, heart6, spade6 ]
-card7 = [ diamond7, club7, heart7, spade7 ]
-card8 = [ diamond8, club8, heart8, spade8 ]
-card9 = [ diamond9, club9, heart9, spade9 ]
-card10 = [ diamond10, club10, heart10, spade10, \
-            diamondJ, clubJ, heartJ, spadeJ, \
-            diamondQ, clubQ, heartQ, spadeQ, \
-            diamondK, clubK, heartK, spadeK ]
+          diamondK, clubK, heartK, spadeK]
+
 
 def getAmt(card):
-    #Returns value of the card is worth.
-    #Ace is 11 by default (and as 1 when needed; see game engine)
-    #10/Jack/Queen/King is 10
+    # Returns value of the card is worth.
+    # Ace is 11 by default (and as 1 when needed; see game engine)
+    # 10/Jack/Queen/King is 10
     if card in cardA:
         return 11
     elif card in card2:
@@ -111,4 +112,3 @@ def getAmt(card):
         return 10
     else:
         exit()
-
