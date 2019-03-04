@@ -156,6 +156,7 @@ def simulate_one_step(state, action, userCard, dealCard, ccards, stand):
                 while dealSum > 21 and dealA > 0:
                     dealA -= 1
                     dealSum -= 10
+        # calculate reward
         if userSum == dealSum:
             reward = 0
         elif userSum <= 21 and len(userCard) == 5:
@@ -192,6 +193,7 @@ def MC_Policy_Evaluation(policy, states, gamma, MCvalues, G):
         # update
         for e in episode:
             G[e[0]].append(reward_to_go(e[0], gamma, episode))
+            # set the average value
             MCvalues[e[0]] = np.mean(G[e[0]])
 
 
@@ -205,10 +207,14 @@ def TD_Policy_Evaluation(policy, states, gamma, TDvalues, NTD):
         userSum, userA, dealSum, dealA, dealFirst, dealAFirst = initGame(ccards, userCard, dealCard)
         state = make_state(userSum, userA, dealFirst, dealAFirst)
         while state is not None:
+            # increment the number of occurrence of the state
             NTD[state] += 1
+            # calculate the alpha
             alpha = 10 / (9 + NTD[state])
+            # simulate one step
             next_state, reward = simulate_one_step(state, policy(state[0]), userCard, dealCard, ccards, False)
             if next_state is not None:
+                # TD value formula
                 TDvalues[state] += alpha * (reward + gamma * TDvalues[next_state] - TDvalues[state])
             else:
                 TDvalues[state] += alpha * (reward - TDvalues[state])
@@ -234,13 +240,17 @@ def Q_Learning(states, gamma, Qvalues, NQ):
         ccards = copy.copy(cards)
         userSum, userA, dealSum, dealA, dealFirst, dealAFirst = initGame(ccards, userCard, dealCard)
         state = make_state(userSum, userA, dealFirst, dealAFirst)
-        eps = 0.2
+        eps = 0.1
         while state is not None:
+            # increment the number of occurrence of the state
             NQ[state] += 1
+            # calculate the alpha
             alpha = 10 / (9 + NQ[state])
             action = pick_action(state, eps, Qvalues)
+            # simulate one step
             next_state, reward = simulate_one_step(state, action, userCard, dealCard, ccards, False)
             if next_state is not None:
+                # Q learning formula
                 Qvalues[state][action] += alpha * (
                         reward + gamma * max([Qvalues[next_state][0],
                                               Qvalues[next_state][1]]) - Qvalues[state][action])
